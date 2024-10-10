@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+
+    <main>
+        <section>           
+            <!-- Form per esercizio -->
+            <form action="https://wizalex.altervista.org/wscorso.php" method="post" target="_blank" class="container w-25 mt-4 p-4 border rounded shadow-sm">
+                <h4>Form per esercizio</h4>
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="nome">
+                </div>
+
+                <div class="mb-3">
+                    <label for="cognome" class="form-label">Cognome</label>
+                    <input type="text" class="form-control" name="cognome" id="cognome">
+                </div>
+
+                <fieldset class="mb-3">
+                    <p>Genere</p>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="genere" id="maschio" value="maschio">
+                        <label for="maschio" class="form-check-label">Maschio</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" name="genere" id="femmina" value="femmina">
+                        <label for="femmina" class="form-check-label">Femmina</label>
+                    </div>
+                </fieldset>
+
+                <div class="mb-3">
+                    <label for="anno_nascita" class="form-label">Anno di nascita</label>
+                    <input type="number" class="form-control" name="anno_nascita" id="anno_nascita" >
+                </div>
+
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password" id="password" required pattern="alessandro">
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <button type="submit" class="w-50 btn btn-primary">Invia</button>
+                    <button type="reset" class="w-50 btn btn-secondary">Reset</button>
+                </div>
+            </form>
+        </section>
+    </main>
+    
+</body>
+</html>
