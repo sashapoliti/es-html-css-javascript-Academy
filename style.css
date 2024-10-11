@@ -1,14 +1,78 @@
-p {
-    text-align: center;
-    font-size: 50px;
-    font-weight: bold;
-    font-family: 'Courier New', Courier, monospace;
-    color: red;
+/* general */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-sizing: border-box;
+    text-decoration: none;
+    scroll-behavior: smooth;
 }
 
-p.decorazione {
-    text-decoration: underline wavy blue 4px;
-    text-transform: uppercase;
-    line-height: 30px;
-    font-style: italic;
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    background-color: rgb(255, 255, 255);
+}
+
+/* header and navbar */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+header>nav {
+    background-color: rgb(231, 171, 231);
+    padding: 10px 0;
+    border-radius: 20px;
+}
+
+header>nav .btn {
+    background-color: rgb(255, 255, 255);
+    transition: background-color 0.5s;
+}
+
+header>nav .btn:hover {
+    background-color: rgb(235, 212, 235);
+}
+
+/* main and sections */
+
+main {
+    margin-top: 170px;
+}
+main section {
+    margin: 50px 0;
+}
+
+@keyframes float {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(100px); }
+    50% { transform: translateX(0); }
+    75% { transform: translateX(-100px); }
+    100% { transform: translateX(0); }
+}
+
+img.kirby-fly {
+    animation: float 4s ease-in-out infinite;
+}
+
+main section .btn {
+    background-color: rgb(231, 171, 231);
+    border: solid 2px rgb(231, 171, 231);
+    transition: color 0.5s, background-color 0.5s;
+}
+
+main section .btn:hover {
+    background-color: white;
+    border: solid 2px rgb(231, 171, 231);
+    color: rgb(231, 171, 231);
 }
