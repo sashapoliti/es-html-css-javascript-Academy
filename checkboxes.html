@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkbox Customizzata Esercizio</title>
+  </head>
+  <body>
+
+    <!-- la checkbox -->
+    <label class="container">
+      <input type="checkbox" /> Kirby
+      <span class="checkmark">
+      </span>
+    </label>
+
+    <style>
+      /* distanzio la scritta dal nuovo checkmark */
+      .container {
+        display: block;
+        position: relative;
+        padding-left: 110px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 22px;
+        height: 100px;
+        padding-top: 35px;
+      }
+
+      /* nascondo il checkmark vecchio */
+      .container input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+      }
+
+      /* creo il nuovo checkmark con immagine di background */
+       .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100px;
+        width: 100px;
+        background-image: url("https://pbs.twimg.com/media/EpjCLqsXUAEf_6J.png");
+        background-size: cover;
+        border: solid 3px rgb(231, 171, 231);
+      }
+
+      /* Questa è l'immagine di quando è check */
+      .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+        height: 100px;
+        width: 100px;
+        background-image: url("https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/23761868/Screen_Shot_2022_07_12_at_10.55.30_AM.png?quality=90&strip=all&crop=10.766423357664%2C0%2C78.467153284672%2C100&w=750");
+        background-size: cover;
+      }
+
+      /* Cambio display da none a block al click */
+      .container input:checked ~ .checkmark:after {
+        display: block;
+      }
+    </style>
+  </body>
+</html>

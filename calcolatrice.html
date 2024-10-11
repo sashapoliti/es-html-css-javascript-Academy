@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatrice</title>
+</head>
+<body>
+
+    <h1>Calcolatrice</h1>
+    <!-- primo numero -->
+    <label for="num1">Primo numero</label>
+    <input type="number" name="num1" id="num1">
+    <br />
+    <label for="num2">Secondo numero</label>
+    <input type="number" name="num2" id="num2">
+    <br />
+    <br />
+    <button id="somma">+</button>
+    <button id="sottrazione">-</button>
+    <button id="moltiplicazione">*</button>
+    <button id="divisione">/</button>
+    <br />
+    <br />
+    <div>
+        <span>Risultato: </span> <span id="risultato"></span>
+    </div>
+    <script>
+
+        /* prendo il bottone somma */
+        let somma = document.getElementById("somma");
+        /* aggiungo evento al bottone */
+        somma.addEventListener("click", function() {
+            /* svuoto il risultato per riusabilità */
+            document.getElementById("risultato").innerHTML = "";
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let risultato = parseInt(num1) + parseInt(num2);
+            document.getElementById("risultato").innerHTML = risultato;
+        });
+
+        /* aggiungo evento al bottone sottrazione */
+        let sottrazione = document.getElementById("sottrazione");
+        sottrazione.addEventListener("click", function() {
+            /* svuoto il risultato */
+            document.getElementById("risultato").innerHTML = "";
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let risultato = parseInt(num1) - parseInt(num2);
+            document.getElementById("risultato").innerHTML = risultato;
+        });
+
+        /* aggiungo evento al bottone moltiplicazione */
+        let moltiplicazione = document.getElementById("moltiplicazione");
+        moltiplicazione.addEventListener("click", function() {
+            /* svuoto il risultato */
+            document.getElementById("risultato").innerHTML = "";
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let risultato = parseInt(num1) * parseInt(num2);
+            document.getElementById("risultato").innerHTML = risultato;
+        });
+
+        /* aggiungo evento al bottone somma */
+        let divisione = document.getElementById("divisione");
+        divisione.addEventListener("click", function() {
+            /* svuoto il risultato */
+            document.getElementById("risultato").innerHTML = "";
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let risultato = parseInt(num1) / parseInt(num2);
+            document.getElementById("risultato").innerHTML = risultato;
+        });
+
+    </script>
+    
+</body>
+</html>
