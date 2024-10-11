@@ -12,21 +12,32 @@
     <label for="num1">Primo numero</label>
     <input type="number" name="num1" id="num1">
     <br />
+    <br />
+    <!-- secondo numero -->
     <label for="num2">Secondo numero</label>
     <input type="number" name="num2" id="num2">
     <br />
     <br />
+    <!-- lista dei bottoni -->
     <button id="somma">+</button>
     <button id="sottrazione">-</button>
     <button id="moltiplicazione">*</button>
     <button id="divisione">/</button>
     <br />
     <br />
+    <!-- risultato finale -->
     <div>
         <span>Risultato: </span> <span id="risultato"></span>
     </div>
+    <style>
+        button {
+            margin: 10px;
+            width: 30px;
+            height: 30px;
+            font-size: 20px;
+        }
+    </style>
     <script>
-
         /* prendo il bottone somma */
         let somma = document.getElementById("somma");
         /* aggiungo evento al bottone */
@@ -35,8 +46,13 @@
             document.getElementById("risultato").innerHTML = "";
             let num1 = document.getElementById("num1").value;
             let num2 = document.getElementById("num2").value;
-            let risultato = parseInt(num1) + parseInt(num2);
-            document.getElementById("risultato").innerHTML = risultato;
+            /* controllo che i campi siano compilati, tutti e due */
+            if ((num1 !== "" || num2 !== "") && (num1 !== '' && num2 !== '')) {
+                let risultato = parseFloat(num1) + parseFloat(num2);
+                document.getElementById("risultato").innerHTML = risultato;
+            } else {
+                document.getElementById("risultato").innerHTML = "Inserisci un numero";
+            }         
         });
 
         /* aggiungo evento al bottone sottrazione */
@@ -46,8 +62,12 @@
             document.getElementById("risultato").innerHTML = "";
             let num1 = document.getElementById("num1").value;
             let num2 = document.getElementById("num2").value;
-            let risultato = parseInt(num1) - parseInt(num2);
-            document.getElementById("risultato").innerHTML = risultato;
+            if ((num1 !== "" || num2 !== "") && (num1 !== '' && num2 !== '')) {
+                let risultato = parseFloat(num1) - parseFloat(num2);
+                document.getElementById("risultato").innerHTML = risultato;
+            } else {
+                document.getElementById("risultato").innerHTML = "Inserisci un numero";
+            }
         });
 
         /* aggiungo evento al bottone moltiplicazione */
@@ -57,8 +77,13 @@
             document.getElementById("risultato").innerHTML = "";
             let num1 = document.getElementById("num1").value;
             let num2 = document.getElementById("num2").value;
-            let risultato = parseInt(num1) * parseInt(num2);
-            document.getElementById("risultato").innerHTML = risultato;
+            if ((num1 !== "" || num2 !== "") && (num1 !== '' && num2 !== '')) {
+                let risultato = parseFloat(num1) * parseFloat(num2);
+                document.getElementById("risultato").innerHTML = risultato;
+            } else {
+                document.getElementById("risultato").innerHTML = "Inserisci un numero";
+            }
+            
         });
 
         /* aggiungo evento al bottone somma */
@@ -68,10 +93,19 @@
             document.getElementById("risultato").innerHTML = "";
             let num1 = document.getElementById("num1").value;
             let num2 = document.getElementById("num2").value;
-            let risultato = parseInt(num1) / parseInt(num2);
-            document.getElementById("risultato").innerHTML = risultato;
+            if ((num1 !== "" || num2 !== "") && (num1 !== '' && num2 !== '')) {
+                /* dopo aver controllato che entrambi i campi siano compilati,
+                controllo che il secondo numero non sia 0 */
+                if (num2 == 0) {
+                    document.getElementById("risultato").innerHTML = "Impossibile dividere per 0";
+                    return;
+                }
+                let risultato = parseFloat(num1) / parseFloat(num2);
+                document.getElementById("risultato").innerHTML = risultato;
+            } else {
+                document.getElementById("risultato").innerHTML = "Inserisci un numero";
+            }
         });
-
     </script>
     
 </body>
