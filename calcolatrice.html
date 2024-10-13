@@ -7,105 +7,154 @@
 </head>
 <body>
 
-    <h1>Calcolatrice</h1>
-    <!-- primo numero -->
-    <label for="num1">Primo numero</label>
-    <input type="number" name="num1" id="num1">
-    <br />
-    <br />
-    <!-- secondo numero -->
-    <label for="num2">Secondo numero</label>
-    <input type="number" name="num2" id="num2">
-    <br />
-    <br />
-    <!-- lista dei bottoni -->
-    <button id="somma">+</button>
-    <button id="sottrazione">-</button>
-    <button id="moltiplicazione">*</button>
-    <button id="divisione">/</button>
-    <br />
-    <br />
-    <!-- risultato finale -->
-    <div>
-        <span>Risultato: </span> <span id="risultato"></span>
+    <div class="calcolatrice">
+        <input type="text" id="display" disabled />
+        <br />
+        <button onclick="svuotaTutto()" class="svuota">C</button>
+        <button onclick="cancella()">←</button>
+        <button onclick="scegliOperatore('/')" >/</button>
+        <button onclick="scegliOperatore('*')" >*</button>
+        <br />
+        <button onclick="scriviSuDisplay('7')">7</button>
+        <button onclick="scriviSuDisplay('8')">8</button>
+        <button onclick="scriviSuDisplay('9')">9</button>
+        <button onclick="scegliOperatore('-')" >-</button>
+        <br />
+        <button onclick="scriviSuDisplay('4')">4</button>
+        <button onclick="scriviSuDisplay('5')">5</button>
+        <button onclick="scriviSuDisplay('6')">6</button>
+        <button onclick="scegliOperatore('+')">+</button>
+        <br />
+        <button onclick="scriviSuDisplay('1')">1</button>
+        <button onclick="scriviSuDisplay('2')">2</button>
+        <button onclick="scriviSuDisplay('3')">3</button>
+        <button onclick="calcola()">=</button>
+        <br />
+        <button onclick="scriviSuDisplay('0')" style="width: 75px;">0</button>
+        <button onclick="scriviSuDisplay('.')">.</button>
     </div>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+        }
+        .calcolatrice {
+            margin-top: 30px;
+            background-color: pink;
+            background-image: url("https://upload.wikimedia.org/wikipedia/en/4/4e/Kirby_Nintendo.png");
+            background-size: 150px;
+            background-position: bottom right;
+            background-repeat: no-repeat;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        #display {
+            max-width: 240px;
+            height: 40px;
+            font-size: 40px;
+            color: black;
+            text-align: right;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 3px solid rgb(255, 136, 156);
+        }
         button {
-            margin: 10px;
             width: 30px;
             height: 30px;
+            margin: 5px;
             font-size: 20px;
+            border: none;
+            background-color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: rgb(253, 230, 233);
+            transform: scale(1.1);
+        }
+        button:active {
+            background-color: rgb(255, 136, 156);
+        }
+        .svuota {
+            background-image: url(https://media.tenor.com/7I9nkd071vYAAAAM/food-coma-food.gif);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: transparent;
         }
     </style>
     <script>
-        /* prendo il bottone somma */
-        let somma = document.getElementById("somma");
-        /* aggiungo evento al bottone */
-        somma.addEventListener("click", function() {
-            /* svuoto il risultato per riusabilità */
-            document.getElementById("risultato").innerHTML = "";
-            let num1 = document.getElementById("num1").value;
-            let num2 = document.getElementById("num2").value;
-            /* controllo che i campi siano compilati, tutti e due */
-            if ((num1 !== "" || num2 !== "") && (num1 !== '' && num2 !== '')) {
-                let risultato = parseFloat(num1) + parseFloat(num2);
-                document.getElementById("risultato").innerHTML = risultato;
-            } else {
-                document.getElementById("risultato").innerHTML = "Inserisci un numero";
-            }         
-        });
+        /* dichiaro le variabili */
+        let display = document.getElementById("display");
+        let num1 = "";
+        let num2 = "";
+        let operazione = "";
+        let risultato = false;
 
-        /* aggiungo evento al bottone sottrazione */
-        let sottrazione = document.getElementById("sottrazione");
-        sottrazione.addEventListener("click", function() {
-            /* svuoto il risultato */
-            document.getElementById("risultato").innerHTML = "";
-            let num1 = document.getElementById("num1").value;
-            let num2 = document.getElementById("num2").value;
-            if ((num1 !== "" || num2 !== "") && (num1 !== '' && num2 !== '')) {
-                let risultato = parseFloat(num1) - parseFloat(num2);
-                document.getElementById("risultato").innerHTML = risultato;
-            } else {
-                document.getElementById("risultato").innerHTML = "Inserisci un numero";
+        /* funzione per resettare tutto */
+        function svuotaTutto() {
+            display.value = "";
+            num1 = "";
+            num2 = "";
+            operazione = "";
+            risultato = false;
+        }
+        /* funzione per scrivere i numeri */
+        function scriviSuDisplay(value) {
+            if (risultato) {
+                svuotaTutto();
             }
-        });
-
-        /* aggiungo evento al bottone moltiplicazione */
-        let moltiplicazione = document.getElementById("moltiplicazione");
-        moltiplicazione.addEventListener("click", function() {
-            /* svuoto il risultato */
-            document.getElementById("risultato").innerHTML = "";
-            let num1 = document.getElementById("num1").value;
-            let num2 = document.getElementById("num2").value;
-            if ((num1 !== "" || num2 !== "") && (num1 !== '' && num2 !== '')) {
-                let risultato = parseFloat(num1) * parseFloat(num2);
-                document.getElementById("risultato").innerHTML = risultato;
-            } else {
-                document.getElementById("risultato").innerHTML = "Inserisci un numero";
+            document.getElementById("display").value += value;
+        }
+        /* funzione per cancellare i numeri */
+        function cancella() {
+            if (risultato) {
+                svuotaTutto();
             }
-            
-        });
-
-        /* aggiungo evento al bottone somma */
-        let divisione = document.getElementById("divisione");
-        divisione.addEventListener("click", function() {
-            /* svuoto il risultato */
-            document.getElementById("risultato").innerHTML = "";
-            let num1 = document.getElementById("num1").value;
-            let num2 = document.getElementById("num2").value;
-            if ((num1 !== "" || num2 !== "") && (num1 !== '' && num2 !== '')) {
-                /* dopo aver controllato che entrambi i campi siano compilati,
-                controllo che il secondo numero non sia 0 */
-                if (num2 == 0) {
-                    document.getElementById("risultato").innerHTML = "Impossibile dividere per 0";
+            display.value = display.value.substring(0, display.value.length - 1);
+        }
+        /* funzione per fare operazione */
+        function scegliOperatore(operatore) {
+            if (risultato) {
+                svuotaTutto();
+            }
+            if (display.value === "") {
+                return;
+            }
+            num1 = display.value;
+            display.value = "";
+            operazione = operatore;
+        }
+        /* funzione per calcolare */
+        function calcola() {
+            if (risultato) {
+                svuotaTutto();
+            }
+            num2 = display.value;
+            if (num2 === "") {
+                return;
+            }
+            if (operazione === "+") {
+                display.value = parseFloat(num1) + parseFloat(num2);
+            } else if (operazione === "-") {
+                display.value = parseFloat(num1) - parseFloat(num2);
+            } else if (operazione === "*") {
+                display.value = parseFloat(num1) * parseFloat(num2);
+            } else if (operazione === "/") {
+                if (num2 === "0") {
+                    display.value = "Errore";
+                    risultato = true;
                     return;
                 }
-                let risultato = parseFloat(num1) / parseFloat(num2);
-                document.getElementById("risultato").innerHTML = risultato;
-            } else {
-                document.getElementById("risultato").innerHTML = "Inserisci un numero";
+                display.value = parseFloat(num1) / parseFloat(num2);
             }
-        });
+            risultato = true;
+        }
     </script>
     
 </body>
