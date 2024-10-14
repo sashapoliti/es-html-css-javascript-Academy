@@ -14,6 +14,8 @@ const fn1 = (a, b) => {
     return a + b;
 }
 
+
+
 /* 
 const fn2 = function (a, b) {
     return a * b;
@@ -23,6 +25,8 @@ trasformarla in arrow function a riga singola
 */
 
 const fn2 = (a, b) => a * b;
+
+
 
 /* 
 const fn3 = function (a) {
@@ -37,6 +41,8 @@ const fn3 = a => {
     a = a * a;
     return a + a;
 }
+
+
 
 /* 
 const fn4 = function () {
@@ -54,6 +60,8 @@ const fn4 = () => {
     return a + a;
 }
 
+
+
 /* 
 const fn5 = function (a) {
     return { prop1: a };
@@ -63,6 +71,8 @@ arrow function con object literal
 */
 
 const fn5 = a => ({ prop1: a });
+
+
 
 /* risultati */
 
