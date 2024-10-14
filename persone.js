@@ -118,6 +118,14 @@ function aggiungi() {
   let cognome = document.getElementById("cognome").value;
   let eta = document.getElementById("eta").value;
 
+  /* creo la persona e aggiungo all'array (inutile) */
+  let persona = {
+    nome: nome,
+    cognome: cognome,
+    eta: eta,
+  };
+  persone.push(persona);
+
   /* svuoto i campi */
   document.getElementById("nome").value = "";
   document.getElementById("cognome").value = "";
@@ -133,7 +141,6 @@ function aggiungi() {
 
 /* funzione per salvare cookie */
 function salvaCookie(nomeCookie, cognomeCookie, etaCookie) {
-  console.log(nomeCookie, cognomeCookie, etaCookie);
   document.cookie = `nome=${nomeCookie},cognome=${cognomeCookie},eta=${etaCookie};`;
 
   console.log(document.cookie);
