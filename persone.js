@@ -99,10 +99,10 @@ function creaCard(nomeEs, cognomeEs, etaEs) {
   eta.classList.add("eta");
 
   /* riempio i testi */
-  nome.innerHTML = persona.nome;
-  cognome.innerHTML = persona.cognome;
-  eta.innerHTML = persona.eta;
-  cookie.innerHTML = `<span class="cookie" onclick="salvaCookie('${persona.nome}', '${persona.cognome}', ${persona.eta})"><i class="fa-solid fa-cookie"></i> Salva Cookie</span>`;
+  nome.innerHTML = `<strong>Nome</strong>: ${persona.nome}`;
+  cognome.innerHTML = `<strong>Cognome</strong>: ${persona.cognome}`;
+  eta.innerHTML = `<strong>Età</strong>: ${persona.eta}`;
+  cookie.innerHTML = `<i class="fa-solid fa-cookie"></i> <span class="cookie" onclick="salvaCookie('${persona.nome}', '${persona.cognome}', ${persona.eta})"> Salva Cookie</span>`;
   img.innerHTML = `<img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="card-img-top" alt="...">`;
 
   /* inscatolo gli elementi */
