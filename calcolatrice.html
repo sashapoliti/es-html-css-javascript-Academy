@@ -7,13 +7,14 @@
 </head>
 <body>
 
+    <!-- html -->
     <div class="calcolatrice">
         <input type="text" id="display" disabled />
         <br />
         <button onclick="svuotaTutto()" class="svuota">C</button>
         <button onclick="cancella()">←</button>
         <button onclick="scegliOperatore('/')" >/</button>
-        <button onclick="scegliOperatore('*')" >*</button>
+        <button onclick="scegliOperatore('*')" >x</button>
         <br />
         <button onclick="scriviSuDisplay('7')">7</button>
         <button onclick="scriviSuDisplay('8')">8</button>
@@ -33,9 +34,11 @@
         <button onclick="scriviSuDisplay('0')" style="width: 75px;">0</button>
         <button onclick="scriviSuDisplay('.')">.</button>
     </div>
+
+    <!-- css -->
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -90,6 +93,8 @@
             color: transparent;
         }
     </style>
+
+    <!-- javascript -->
     <script>
         /* dichiaro le variabili */
         let display = document.getElementById("display");
@@ -122,9 +127,6 @@
         }
         /* funzione per fare operazione */
         function scegliOperatore(operatore) {
-            if (risultato) {
-                svuotaTutto();
-            }
             if (display.value === "") {
                 return;
             }
@@ -135,11 +137,11 @@
         /* funzione per calcolare */
         function calcola() {
             if (risultato) {
-                svuotaTutto();
+                risultato = false;
             }
             num2 = display.value;
             if (num2 === "") {
-                return;
+                num2 = num1;
             }
             if (operazione === "+") {
                 display.value = parseFloat(num1) + parseFloat(num2);
