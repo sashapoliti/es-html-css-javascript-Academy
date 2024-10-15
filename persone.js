@@ -88,8 +88,10 @@ function creaCard(nomeEs, cognomeEs, etaEs) {
   faccio splice nell'array (inutile)
   e rimuovo la card dal dom per vedere l'eliminazione*/
   buttonDelete.addEventListener("click", () => {
-    let index = persone.indexOf(persona);
+    let index = persone.map(el => el.nome).indexOf(persona.nome);
+    console.log(index);
     persone.splice(index, 1);
+    console.log(persone);
     card.remove();
   });
   img.classList.add("myImg");
@@ -144,4 +146,21 @@ function salvaCookie(nomeCookie, cognomeCookie, etaCookie) {
   document.cookie = `nome=${nomeCookie},cognome=${cognomeCookie},eta=${etaCookie};`;
 
   console.log(document.cookie);
+}
+
+/* ricerca di utente e mostra alert */
+function cerca() {
+  let utente = document.getElementById("cerca").value;
+  let flag = false;
+
+  persone.find((persona) => {
+    if (persona.nome === utente) {
+      alert(`Ciao ${persona.nome} ${persona.cognome} hai ${persona.eta} anni.`);
+      flag = true;
+    }
+  });
+
+  if (!flag) {
+    alert("Non ho trovato nessuna persona");
+  }
 }
