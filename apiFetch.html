@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <title>Esercizio Api</title>
+</head>
+<body>
+
+    <!-- header con searchbar -->
+    <!-- <header>
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+              <div class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Cerca qui..." aria-label="Search" id="cerca">
+                <button class="btn btn-outline-primary" onclick="cerca()"><i class="fa-solid fa-magnifying-glass"></i></button>
+              </div>
+            </div>
+          </nav>
+    </header> -->
+
+    <div class="d-flex justify-content-center my-3">
+        <div class="loader d-none">
+        </div>
+    </div>
+
+    <main class="container d-flex flex-wrap">
+    </main>
+
+    <!-- bottone per aprire l'offcanvas -->
+    <button id="bottoneImp" class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+        <i class="fa-solid fa-plus"></i>
+    </button>
+      
+    <!-- corpo dell'offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+        <div class="offcanvas-header">
+          <h5 class="offcanvas-title" id="offcanvasExampleLabel">Aggiungi una persona</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Form per aggiunta di persone -->
+            <div class="form">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Nome*</span>
+                    <input type="text" class="form-control" name="nome" id="nome">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Cognome*</span>
+                    <input type="text" class="form-control" name="cognome" id="cognome">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Avatar</span>
+                    <input type="text" class="form-control" name="avatar" id="avatar">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Email</span>
+                    <input type="email" class="form-control" name="email" id="email">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">Telefono</span>
+                    <input type="phone" class="form-control" name="telefono" id="telefono">
+                </div>
+
+                <button class="btn btn-primary" onclick="aggiungi()">Aggiungi</button>             
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .loader {
+            border: 16px solid #f3f3f3; /* Light grey */
+            border-top: 16px solid #3498db; /* Blue */
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+          
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        main {
+            margin-top: 30px;
+        }
+
+        #bottoneImp{
+            width: 100px;
+            height: 100px;
+            font-size: 50px;
+            border-radius: 35%;
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 9999;
+        }
+
+        .myCard{
+            position: relative;
+            width: calc(100% / 5 - 40px);
+            background-color: rgb(255, 255, 255);
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s;
+            cursor: pointer;
+        }
+
+        .myCard:hover{
+            transform: scale(1.1);
+        }
+
+        .eliminare {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            aspect-ratio: 1 / 1;
+            border: none;
+            color: red;
+            background-color: transparent;
+        }
+
+        .myImg{
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            border-radius: 50%;
+            background-color: rgb(255, 255, 255);
+            margin: 20px;
+        }
+
+        .info{
+            padding: 10px;
+            width: 100%;
+            font-size: 15px;
+            margin: 0;
+            list-style: none;
+        }
+
+        .form {
+            margin: 10px auto;
+            padding: 20px;
+        }
+        span.cookie {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+    </style>
+
+    <script>
+        /* dichiaro variabili */
+        let container = document.querySelector(".container");
+        let loader = document.querySelector(".loader");
+
+        /* creo per la prima volta cards */
+        get();
+
+        /* chiamata get per le persone */
+        async function get() {
+            container.innerHTML = "";
+            loader.classList.remove("d-none");
+            try {
+                let response = await fetch("https://624ffc1be3e5d24b34199af2.mockapi.io/api/rubrica");
+                let data = await response.json();
+                data.forEach((persona) => {
+                   creaCard(persona);
+                });
+            } catch (error) {
+                console.log(error);
+            } finally {
+                loader.classList.add("d-none");
+            }           
+        }
+
+        /* funzione per aggiungere persone
+        in post */
+        async function aggiungi() {
+            /* prendo i valori da campi di input */
+            let nome = document.getElementById("nome").value;
+            let cognome = document.getElementById("cognome").value;
+            let avatar = document.getElementById("avatar").value;
+            let email = document.getElementById("email").value;
+            let telefono = document.getElementById("telefono").value;
+          
+            /* creo la persona */
+            let persona = {
+              nome: nome,
+              cognome: cognome,
+              avatar: avatar,
+              email: email,
+              telefono: telefono
+            };
+
+            /* controllo che non siano vuoti */
+            if (nome === "" || cognome === "") {
+              alert("Nome e Cognome obbligatori");
+              return;
+            }
+
+            /* aggiungo persona con post */
+            try {
+                let response = await fetch("https://624ffc1be3e5d24b34199af2.mockapi.io/api/rubrica", {
+                    method: "POST",
+                    body: JSON.stringify(persona),
+                    headers: {
+                      "Content-Type": "application/json"
+                    }
+                });
+                let data = await response.json();
+                console.log("Aggiunto: ", data);
+                await get();
+            } catch (error) {
+                console.log(error);
+            } finally {
+               /* svuoto i campi */
+                document.getElementById("nome").value = "";
+                document.getElementById("cognome").value = "";
+                document.getElementById("avatar").value = "";
+                document.getElementById("email").value = "";
+                document.getElementById("telefono").value = ""; 
+            }         
+        }
+
+        /* funzione eliminare persona da id
+        in delete passando da url */
+        async function elimina(id) {
+            try {
+                let response = await fetch(`https://624ffc1be3e5d24b34199af2.mockapi.io/api/rubrica/${id}`, {
+                    method: "DELETE"
+                });
+                let data = await response.json();
+                console.log("Eliminato: ", data);
+                await get();
+            } catch (error) {
+                console.log(error);
+            }            
+        }
+
+        /* funzione per creare card */
+        function creaCard(objPersona) {
+            let persona = {
+                nome: objPersona.nome,
+                cognome: objPersona.cognome,
+                avatar: objPersona.avatar,
+                email: objPersona.email,
+                telefono: objPersona.telefono,
+                id: objPersona.id
+            };
+          
+            //console.log(persona);
+          
+            /* creo le variabili con gli elementi che mi servono per costruire
+            le card */
+            let card = document.createElement("div");
+            let buttonDelete = document.createElement("button");
+            let img = document.createElement("div");
+            let ul = document.createElement("ul");
+            let nome = document.createElement("li");
+            let cognome = document.createElement("li");
+            let email = document.createElement("li");
+            let telefono = document.createElement("li");
+          
+            /* aggiungo tutte le classi */
+            card.classList.add("myCard");
+            buttonDelete.classList.add("eliminare");
+            buttonDelete.innerHTML = `<i class="fa-solid fa-x"></i>`;
+            /* aggiungo l'evento per eliminare al bottone
+            faccio splice nell'array (inutile)
+            e rimuovo la card dal dom per vedere l'eliminazione*/
+            buttonDelete.addEventListener("click", () => {
+                elimina(persona.id);
+            });
+            img.classList.add("myImg");
+            ul.classList.add("info");
+            nome.classList.add("nome");
+            cognome.classList.add("cognome");
+            email.classList.add("email");
+            telefono.classList.add("telefono");
+          
+            /* riempio i testi */
+            nome.innerHTML = `<strong>Nome</strong>: ${persona.nome}`;
+            cognome.innerHTML = `<strong>Cognome</strong>: ${persona.cognome}`;
+            email.innerHTML = `<strong>Email</strong>: ${persona.email}`;
+            telefono.innerHTML = `<strong>Telefono</strong>: ${persona.telefono}`;
+            if (persona.avatar === '') {
+                img.innerHTML = `<img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" class="card-img-top" alt="...">`;
+            } else {
+                img.innerHTML = `<img src="${persona.avatar}" class="card-img-top" alt="Avatar" onerror="this.src='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';" />`;                
+            }
+          
+            /* inscatolo gli elementi */
+            ul.append(nome, cognome, email, telefono);
+            card.append(img, ul, buttonDelete);
+            container.append(card);
+        }
+    </script>
+</body>
+</html>
